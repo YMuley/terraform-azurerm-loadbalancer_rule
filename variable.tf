@@ -14,3 +14,8 @@ variable "lb_backend_address_pool_output" {
   type = map(any)
   default = {}
 }
+
+variable "lb_health_probe_output" {
+  type = map(any)
+  default = {}
+}

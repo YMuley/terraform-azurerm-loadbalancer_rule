@@ -6,7 +6,7 @@ resource "azurerm_lb_rule" "lb_rule" {
   frontend_port = each.value.frontend_port
   backend_port = each.value.backend_port
   frontend_ip_configuration_name = each.value.frontend_ip_configuration_name
-  probe_id = each.value.health_probe_id
+  probe_id = var.lb_health_probe_output[each.value.health_probe_name].id
   enable_floating_ip = each.value.enable_floating_ip
   idle_timeout_in_minutes = each.value.idle_timeout_in_minutes
   load_distribution = each.value.load_distribution
