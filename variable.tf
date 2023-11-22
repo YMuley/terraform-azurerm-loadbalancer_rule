@@ -10,7 +10,7 @@ variable "load_balancer_output" {
   description = "object output of loadbancer module"
 }
 
-variable "lb_backend_adddresses_output" {
+variable "lb_backend_address_pool_output" {
   type = map(any)
   default = {}
 }
