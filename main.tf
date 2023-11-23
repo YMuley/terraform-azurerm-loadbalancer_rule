@@ -1,7 +1,7 @@
 resource "azurerm_lb_rule" "lb_rule" {
   for_each = local.lb_rule
   name  = each.value.name
-  loadbalancer_id = var.load_balancer_output[each.value.load_balancer_name].id
+  loadbalancer_id = var.load_balancer_output[each.value.loadbalancer_name].id
   protocol = each.value.protocol
   frontend_port = each.value.frontend_port
   backend_port = each.value.backend_port
@@ -12,5 +12,6 @@ resource "azurerm_lb_rule" "lb_rule" {
   load_distribution = each.value.load_distribution
   disable_outbound_snat = each.value.disable_outbound_snat
   enable_tcp_reset = each.value.enable_tcp_reset
-  backend_address_pool_ids = [{for pool_ids in split("," , each.value.backend_address_pool_ids) : pool_ids => var.lb_backend_address_pool_output[pool_ids].id}]
+  count = length(each.value.backend_address_pool_ids)
+  backend_address_pool_ids =  [var.lb_backend_address_pool_output[each.value.backend_address_pool_ids[count.index]].id]
 } 
