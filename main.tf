@@ -12,5 +12,5 @@ resource "azurerm_lb_rule" "lb_rule" {
   load_distribution = each.value.load_distribution
   disable_outbound_snat = each.value.disable_outbound_snat
   enable_tcp_reset = each.value.enable_tcp_reset
-  backend_address_pool_ids = lookup([for pool_id in vvar.lb_backend_address_pool_output : pool_id.id ], [for i in each.value.backend_address_pool_name : i], null)#flatten([ for pool_ids in var.lb_backend_address_pool_output: pool_ids.id if contains(each.value.backend_address_pool_names , pool_ids.name) == true])
+  backend_address_pool_ids = lookup([for pool_id in var.lb_backend_address_pool_output : pool_id.id ], [for i in each.value.backend_address_pool_name : i], null)#flatten([ for pool_ids in var.lb_backend_address_pool_output: pool_ids.id if contains(each.value.backend_address_pool_names , pool_ids.name) == true])
 } 
